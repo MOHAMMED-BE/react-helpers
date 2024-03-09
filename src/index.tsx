@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios'
 
 interface TruncateTextProps {
     text: string
@@ -18,6 +19,42 @@ export const transformData = async (data: any[]) => {
             ...(itemtype === 'product' ? { product: `api/products/${product}` } : {}),
             ...(isvariant && variant ? { variant: `api/variants/${variant}` } : {}),
             ...(itemtype === 'pack' ? { pack: `api/packs/${product}` } : {}),
+            ...(isvariant ? { isvariant: true } : { isvariant: false }),
+            ...rest,
+        }
+
+        return transformedItem
+    })
+
+    return transformedData
+}
+
+export const transformCartData = async (data: any[]) => {
+    const packIdsArray = await Promise.all(
+        data.map(async (item) => {
+            const { product, pack, ...rest } = item
+            let uniqId = typeof product === 'string' ? product : null
+
+            if (uniqId !== null) {
+                const response = await axios.get(`pack-id/uniq_id/${product}`);
+
+                if (response.status === 200) {
+                    return response.data.packId
+                }
+            }
+
+            return null
+        })
+    )
+
+    const transformedData = data.map((item, index) => {
+        const { product, variant, isvariant, ...rest } = item
+        const packId = typeof product === 'string' ? packIdsArray[index] : null
+
+        const transformedItem: any = {
+            ...(typeof product === 'number' ? { product: `api/products/${product}` } : {}),
+            ...(isvariant && variant ? { variant: `api/variants/${variant}` } : {}),
+            ...(typeof product === 'string' && packId !== null ? { pack: `api/packs/${packId}` } : {}),
             ...(isvariant ? { isvariant: true } : { isvariant: false }),
             ...rest,
         }
