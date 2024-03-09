@@ -3,8 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.formatDate = exports.TruncateText = exports.handleImageLinkDrage = exports.formatPrice = exports.handleScrollTop = exports.referenceGenerator = exports.decodeHtmlTags = exports.encodeHtmlTags = exports.isEven = exports.randomKeyGenerator = exports.transformData = void 0;
+exports.formatDate = exports.TruncateText = exports.handleImageLinkDrage = exports.formatPrice = exports.handleScrollTop = exports.referenceGenerator = exports.decodeHtmlTags = exports.encodeHtmlTags = exports.isEven = exports.randomKeyGenerator = exports.transformCartData = exports.transformData = void 0;
 const react_1 = __importDefault(require("react"));
+const axios_1 = __importDefault(require("axios"));
 const transformData = async (data) => {
     const transformedData = data.map((item, index) => {
         const { product, variant, isvariant, itemtype, ...rest } = item;
@@ -20,6 +21,33 @@ const transformData = async (data) => {
     return transformedData;
 };
 exports.transformData = transformData;
+const transformCartData = async (data) => {
+    const packIdsArray = await Promise.all(data.map(async (item) => {
+        const { product, pack, ...rest } = item;
+        let uniqId = typeof product === 'string' ? product : null;
+        if (uniqId !== null) {
+            const response = await axios_1.default.get(`pack-id/uniq_id/${product}`);
+            if (response.status === 200) {
+                return response.data.packId;
+            }
+        }
+        return null;
+    }));
+    const transformedData = data.map((item, index) => {
+        const { product, variant, isvariant, ...rest } = item;
+        const packId = typeof product === 'string' ? packIdsArray[index] : null;
+        const transformedItem = {
+            ...(typeof product === 'number' ? { product: `api/products/${product}` } : {}),
+            ...(isvariant && variant ? { variant: `api/variants/${variant}` } : {}),
+            ...(typeof product === 'string' && packId !== null ? { pack: `api/packs/${packId}` } : {}),
+            ...(isvariant ? { isvariant: true } : { isvariant: false }),
+            ...rest,
+        };
+        return transformedItem;
+    });
+    return transformedData;
+};
+exports.transformCartData = transformCartData;
 const randomKeyGenerator = (length) => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
     let randomKey = '';
