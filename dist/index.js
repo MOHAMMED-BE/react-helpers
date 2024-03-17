@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.frCustomeErrorNorify = exports.enCustomeErrorNorify = exports.warningNotify = exports.infoNotify = exports.errorNotify = exports.successNotify = exports.deleteNotify = exports.updateNotify = exports.postNotify = exports.notify = exports.FormLabel = exports.removeHtmlTags = exports.getTodayDate = exports.formatDate = exports.TruncateText = exports.handleImageLinkDrage = exports.formatPrice = exports.handleScrollTop = exports.decodeHtmlTags = exports.encodeHtmlTags = exports.isEven = exports.getFirstWord = exports.arabicSlugGenerator = exports.slugGenerator = exports.referenceGenerator = exports.randomKeyGenerator = exports.transformCartData = exports.transformData = void 0;
+exports.ToastContainer = exports.frCustomeErrorNorify = exports.enCustomeErrorNorify = exports.warningNotify = exports.infoNotify = exports.errorNotify = exports.successNotify = exports.deleteNotify = exports.updateNotify = exports.postNotify = exports.notify = exports.FormLabel = exports.removeHtmlTags = exports.getTodayDate = exports.formatDate = exports.TruncateText = exports.handleImageLinkDrage = exports.formatPrice = exports.handleScrollTop = exports.decodeHtmlTags = exports.encodeHtmlTags = exports.isEven = exports.getFirstWord = exports.arabicSlugGenerator = exports.slugGenerator = exports.referenceGenerator = exports.randomKeyGenerator = exports.transformCartData = exports.transformData = void 0;
+var react_toastify_1 = require("react-toastify");
+Object.defineProperty(exports, "ToastContainer", { enumerable: true, get: function () { return react_toastify_1.ToastContainer; } });
 var Helpers_1 = require("./Helpers");
 Object.defineProperty(exports, "transformData", { enumerable: true, get: function () { return Helpers_1.transformData; } });
 Object.defineProperty(exports, "transformCartData", { enumerable: true, get: function () { return Helpers_1.transformCartData; } });

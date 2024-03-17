@@ -1,6 +1,6 @@
 {
   "name": "@mbs-dev/react-helpers",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "react-helpers",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
