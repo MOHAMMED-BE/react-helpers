@@ -1,134 +1,32 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.formatDate = exports.TruncateText = exports.handleImageLinkDrage = exports.formatPrice = exports.handleScrollTop = exports.referenceGenerator = exports.decodeHtmlTags = exports.encodeHtmlTags = exports.isEven = exports.randomKeyGenerator = exports.transformCartData = exports.transformData = void 0;
-const react_1 = __importDefault(require("react"));
-const axios_1 = __importDefault(require("axios"));
-const transformData = async (data) => {
-    const transformedData = data.map((item, index) => {
-        const { product, variant, isvariant, itemtype, ...rest } = item;
-        const transformedItem = {
-            ...(itemtype === 'product' ? { product: `api/products/${product}` } : {}),
-            ...(isvariant && variant ? { variant: `api/variants/${variant}` } : {}),
-            ...(itemtype === 'pack' ? { pack: `api/packs/${product}` } : {}),
-            ...(isvariant ? { isvariant: true } : { isvariant: false }),
-            ...rest,
-        };
-        return transformedItem;
-    });
-    return transformedData;
-};
-exports.transformData = transformData;
-const transformCartData = async (data) => {
-    const packIdsArray = await Promise.all(data.map(async (item) => {
-        const { product, pack, ...rest } = item;
-        let uniqId = typeof product === 'string' ? product : null;
-        if (uniqId !== null) {
-            const response = await axios_1.default.get(`pack-id/uniq_id/${product}`);
-            if (response.status === 200) {
-                return response.data.packId;
-            }
-        }
-        return null;
-    }));
-    const transformedData = data.map((item, index) => {
-        const { product, variant, isvariant, ...rest } = item;
-        const packId = typeof product === 'string' ? packIdsArray[index] : null;
-        const transformedItem = {
-            ...(typeof product === 'number' ? { product: `api/products/${product}` } : {}),
-            ...(isvariant && variant ? { variant: `api/variants/${variant}` } : {}),
-            ...(typeof product === 'string' && packId !== null ? { pack: `api/packs/${packId}` } : {}),
-            ...(isvariant ? { isvariant: true } : { isvariant: false }),
-            ...rest,
-        };
-        return transformedItem;
-    });
-    return transformedData;
-};
-exports.transformCartData = transformCartData;
-const randomKeyGenerator = (length) => {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
-    let randomKey = '';
-    for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * characters.length);
-        randomKey += characters.charAt(randomIndex);
-    }
-    return randomKey;
-};
-exports.randomKeyGenerator = randomKeyGenerator;
-function isEven(number) {
-    return number % 2 === 0;
-}
-exports.isEven = isEven;
-const encodeHtmlAssociations = {
-    ["<"]: "@lt",
-    [">"]: "@gt",
-};
-const decodeHtmlAssociations = {
-    ["@lt"]: "<",
-    ["@gt"]: ">",
-};
-function encodeHtmlTags(html) {
-    Object.keys(encodeHtmlAssociations).forEach((key) => {
-        html = html.replace(new RegExp(key, "g"), encodeHtmlAssociations[key]);
-    });
-    return html;
-}
-exports.encodeHtmlTags = encodeHtmlTags;
-function decodeHtmlTags(html) {
-    Object.keys(decodeHtmlAssociations).forEach((key) => {
-        html = html.replace(new RegExp(key, "g"), decodeHtmlAssociations[key]);
-    });
-    return html;
-}
-exports.decodeHtmlTags = decodeHtmlTags;
-const referenceGenerator = (...elements) => {
-    const currentDate = new Date();
-    const dateElements = {
-        year: String(currentDate.getFullYear()).slice(-2),
-        month: String(currentDate.getMonth() + 1).padStart(2, "0"),
-        day: String(currentDate.getDate()).padStart(2, "0"),
-        hours: String(currentDate.getHours()).padStart(2, "0"),
-        minutes: String(currentDate.getMinutes()).padStart(2, "0"),
-        seconds: String(currentDate.getSeconds()).padStart(2, "0"),
-        randomNumber: Math.floor(Math.random() * 99).toString().padStart(2, "0"),
-    };
-    return elements.map(element => dateElements[element]).join('');
-};
-exports.referenceGenerator = referenceGenerator;
-const handleScrollTop = () => {
-    document.documentElement.scrollTop = 0;
-};
-exports.handleScrollTop = handleScrollTop;
-function formatPrice(price) {
-    const numericPrice = parseFloat(price);
-    if (isNaN(numericPrice)) {
-        return price;
-    }
-    return numericPrice.toLocaleString('en-US', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-    }).replace(',', ' ');
-}
-exports.formatPrice = formatPrice;
-const handleImageLinkDrage = (e) => {
-    e.preventDefault();
-};
-exports.handleImageLinkDrage = handleImageLinkDrage;
-function TruncateText({ text, maxLength }) {
-    if (text.length <= maxLength) {
-        return react_1.default.createElement("span", null, text);
-    }
-    const truncatedText = text.slice(0, maxLength) + '...';
-    return react_1.default.createElement("span", null, truncatedText);
-}
-exports.TruncateText = TruncateText;
-function formatDate(dateInput, template) {
-    const datePart = dateInput.includes('T') ? dateInput.slice(0, 10) : dateInput;
-    const [year, month, day] = datePart.split('-');
-    const dateFormat = { year, month, day };
-    return template(dateFormat);
-}
-exports.formatDate = formatDate;
+exports.frCustomeErrorNorify = exports.enCustomeErrorNorify = exports.warningNotify = exports.infoNotify = exports.errorNotify = exports.successNotify = exports.deleteNotify = exports.updateNotify = exports.postNotify = exports.notify = exports.FormLabel = exports.removeHtmlTags = exports.getTodayDate = exports.formatDate = exports.TruncateText = exports.handleImageLinkDrage = exports.formatPrice = exports.handleScrollTop = exports.decodeHtmlTags = exports.encodeHtmlTags = exports.isEven = exports.getFirstWord = exports.arabicSlugGenerator = exports.slugGenerator = exports.referenceGenerator = exports.randomKeyGenerator = exports.transformCartData = exports.transformData = void 0;
+var Helpers_1 = require("./Helpers");
+Object.defineProperty(exports, "transformData", { enumerable: true, get: function () { return Helpers_1.transformData; } });
+Object.defineProperty(exports, "transformCartData", { enumerable: true, get: function () { return Helpers_1.transformCartData; } });
+Object.defineProperty(exports, "randomKeyGenerator", { enumerable: true, get: function () { return Helpers_1.randomKeyGenerator; } });
+Object.defineProperty(exports, "referenceGenerator", { enumerable: true, get: function () { return Helpers_1.referenceGenerator; } });
+Object.defineProperty(exports, "slugGenerator", { enumerable: true, get: function () { return Helpers_1.slugGenerator; } });
+Object.defineProperty(exports, "arabicSlugGenerator", { enumerable: true, get: function () { return Helpers_1.arabicSlugGenerator; } });
+Object.defineProperty(exports, "getFirstWord", { enumerable: true, get: function () { return Helpers_1.getFirstWord; } });
+Object.defineProperty(exports, "isEven", { enumerable: true, get: function () { return Helpers_1.isEven; } });
+Object.defineProperty(exports, "encodeHtmlTags", { enumerable: true, get: function () { return Helpers_1.encodeHtmlTags; } });
+Object.defineProperty(exports, "decodeHtmlTags", { enumerable: true, get: function () { return Helpers_1.decodeHtmlTags; } });
+Object.defineProperty(exports, "handleScrollTop", { enumerable: true, get: function () { return Helpers_1.handleScrollTop; } });
+Object.defineProperty(exports, "formatPrice", { enumerable: true, get: function () { return Helpers_1.formatPrice; } });
+Object.defineProperty(exports, "handleImageLinkDrage", { enumerable: true, get: function () { return Helpers_1.handleImageLinkDrage; } });
+Object.defineProperty(exports, "TruncateText", { enumerable: true, get: function () { return Helpers_1.TruncateText; } });
+Object.defineProperty(exports, "formatDate", { enumerable: true, get: function () { return Helpers_1.formatDate; } });
+Object.defineProperty(exports, "getTodayDate", { enumerable: true, get: function () { return Helpers_1.getTodayDate; } });
+Object.defineProperty(exports, "removeHtmlTags", { enumerable: true, get: function () { return Helpers_1.removeHtmlTags; } });
+Object.defineProperty(exports, "FormLabel", { enumerable: true, get: function () { return Helpers_1.FormLabel; } });
+Object.defineProperty(exports, "notify", { enumerable: true, get: function () { return Helpers_1.notify; } });
+Object.defineProperty(exports, "postNotify", { enumerable: true, get: function () { return Helpers_1.postNotify; } });
+Object.defineProperty(exports, "updateNotify", { enumerable: true, get: function () { return Helpers_1.updateNotify; } });
+Object.defineProperty(exports, "deleteNotify", { enumerable: true, get: function () { return Helpers_1.deleteNotify; } });
+Object.defineProperty(exports, "successNotify", { enumerable: true, get: function () { return Helpers_1.successNotify; } });
+Object.defineProperty(exports, "errorNotify", { enumerable: true, get: function () { return Helpers_1.errorNotify; } });
+Object.defineProperty(exports, "infoNotify", { enumerable: true, get: function () { return Helpers_1.infoNotify; } });
+Object.defineProperty(exports, "warningNotify", { enumerable: true, get: function () { return Helpers_1.warningNotify; } });
+Object.defineProperty(exports, "enCustomeErrorNorify", { enumerable: true, get: function () { return Helpers_1.enCustomeErrorNorify; } });
+Object.defineProperty(exports, "frCustomeErrorNorify", { enumerable: true, get: function () { return Helpers_1.frCustomeErrorNorify; } });
