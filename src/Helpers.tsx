@@ -125,13 +125,32 @@ export function isEven(number: number): boolean {
     return number % 2 === 0;
 }
 
+// const encodeHtmlAssociations: { [key: string]: string } = {
+//     ["<"]: "@lt",
+//     [">"]: "@gt",
+// }
+// const decodeHtmlAssociations: { [key: string]: string } = {
+//     ["@lt"]: "<",
+//     ["@gt"]: ">",
+// }
+
 const encodeHtmlAssociations: { [key: string]: string } = {
-    ["<"]: "@lt",
-    [">"]: "@gt",
+    ['<']: '@lt',
+    ['>']: '@gt',
+    ['%']: '@percent',
+    ['style="']: '@style',
+    [':']: '@twopoint',
+    [';']: '@pointcomma',
 }
+
+
 const decodeHtmlAssociations: { [key: string]: string } = {
-    ["@lt"]: "<",
-    ["@gt"]: ">",
+    ['@lt']: '<',
+    ['@gt']: '>',
+    ['@percent']: '%',
+    ['@style']: 'style="',
+    ['@twopoint']: ':',
+    ['@pointcomma']: ';',
 }
 
 export function encodeHtmlTags(html: string): string {
@@ -268,6 +287,9 @@ export function frCustomeErrorNorify() {
     toast.error('Une erreur est survenue, réessayez');
 };
 
+export function arrayToString(items: string[]): string {
+    return items.join(',');
+}
 
 export const notify = {
     postNotify,
