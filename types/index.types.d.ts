@@ -1,8 +1,3 @@
-export interface labelProps {
-    value: string;
-    isRequired?: boolean;
-    className?: string;
-}
 export interface TruncateTextProps {
     text: string;
     maxLength: number;

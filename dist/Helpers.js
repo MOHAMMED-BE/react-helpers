@@ -78,7 +78,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.notify = exports.arrayToString = exports.frCustomeErrorNorify = exports.enCustomeErrorNorify = exports.warningNotify = exports.infoNotify = exports.errorNotify = exports.successNotify = exports.deleteNotify = exports.updateNotify = exports.postNotify = exports.FormLabel = exports.removeHtmlTags = exports.getTodayDate = exports.formatDate = exports.TruncateText = exports.handleImageLinkDrage = exports.formatPrice = exports.handleScrollTop = exports.decodeHtmlTags = exports.encodeHtmlTags = exports.isEven = exports.getFirstWord = exports.arabicSlugGenerator = exports.slugGenerator = exports.referenceGenerator = exports.randomKeyGenerator = exports.transformCartData = exports.transformData = void 0;
+exports.notify = exports.arrayToString = exports.frCustomeErrorNotify = exports.enCustomeErrorNotify = exports.warningNotify = exports.infoNotify = exports.errorNotify = exports.successNotify = exports.deleteNotify = exports.updateNotify = exports.postNotify = exports.removeHtmlTags = exports.getTodayDate = exports.formatDate = exports.TruncateText = exports.handleImageLinkDrage = exports.formatPrice = exports.handleScrollTop = exports.decodeHtmlTags = exports.encodeHtmlTags = exports.isEven = exports.getFirstWord = exports.arabicSlugGenerator = exports.slugGenerator = exports.referenceGenerator = exports.randomKeyGenerator = exports.transformCartData = exports.transformData = void 0;
 var react_1 = __importDefault(require("react"));
 var axios_1 = __importDefault(require("axios"));
 var slugify_1 = __importDefault(require("slugify"));
@@ -287,11 +287,6 @@ function removeHtmlTags(input) {
     return input.replace(/<[^>]*>/g, '');
 }
 exports.removeHtmlTags = removeHtmlTags;
-var FormLabel = function (_a) {
-    var value = _a.value, _b = _a.isRequired, isRequired = _b === void 0 ? true : _b, className = _a.className;
-    return react_1.default.createElement("label", { className: "col-lg-6 col-md-6 col-form-label fw-bold fs-6 ".concat(isRequired ? 'required' : '', " ").concat(className) }, value);
-};
-exports.FormLabel = FormLabel;
 function postNotify(entity) {
     react_toastify_1.toast.success("".concat(entity, " ajout\u00E9 avec succ\u00E8s"));
 }
@@ -327,15 +322,15 @@ function warningNotify(text) {
 }
 exports.warningNotify = warningNotify;
 ;
-function enCustomeErrorNorify() {
+function enCustomeErrorNotify() {
     react_toastify_1.toast.error('Something wrong, try again');
 }
-exports.enCustomeErrorNorify = enCustomeErrorNorify;
+exports.enCustomeErrorNotify = enCustomeErrorNotify;
 ;
-function frCustomeErrorNorify() {
+function frCustomeErrorNotify() {
     react_toastify_1.toast.error('Une erreur est survenue, réessayez');
 }
-exports.frCustomeErrorNorify = frCustomeErrorNorify;
+exports.frCustomeErrorNotify = frCustomeErrorNotify;
 ;
 function arrayToString(items) {
     return items.join(',');
@@ -349,6 +344,6 @@ exports.notify = {
     errorNotify: errorNotify,
     infoNotify: infoNotify,
     warningNotify: warningNotify,
-    enCustomeErrorNorify: enCustomeErrorNorify,
-    frCustomeErrorNorify: frCustomeErrorNorify
+    enCustomeErrorNotify: enCustomeErrorNotify,
+    frCustomeErrorNotify: frCustomeErrorNotify
 };

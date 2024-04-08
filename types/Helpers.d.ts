@@ -1,5 +1,5 @@
 import React from "react";
-import { DateElement, DateFormatElement, DateFormatTemplate, TruncateTextProps, labelProps } from './index.types';
+import { DateElement, DateFormatElement, DateFormatTemplate, TruncateTextProps } from './index.types';
 export declare const transformData: (data: any[]) => Promise<any[]>;
 export declare const transformCartData: (data: any[]) => Promise<any[]>;
 export declare const randomKeyGenerator: (length: number) => string;
@@ -17,7 +17,6 @@ export declare function TruncateText({ text, maxLength }: TruncateTextProps): st
 export declare function formatDate(dateInput: string, template?: DateFormatTemplate, asInputValue?: boolean): string;
 export declare const getTodayDate: (dateElements?: DateFormatElement[]) => string;
 export declare function removeHtmlTags(input: any): any;
-export declare const FormLabel: ({ value, isRequired, className }: labelProps) => React.JSX.Element;
 export declare function postNotify(entity: string): void;
 export declare function updateNotify(entity: string): void;
 export declare function deleteNotify(entity: string): void;
@@ -25,8 +24,8 @@ export declare function successNotify(text: string): void;
 export declare function errorNotify(text: string): void;
 export declare function infoNotify(text: string): void;
 export declare function warningNotify(text: string): void;
-export declare function enCustomeErrorNorify(): void;
-export declare function frCustomeErrorNorify(): void;
+export declare function enCustomeErrorNotify(): void;
+export declare function frCustomeErrorNotify(): void;
 export declare function arrayToString(items: string[]): string;
 export declare const notify: {
     postNotify: typeof postNotify;
@@ -36,6 +35,6 @@ export declare const notify: {
     errorNotify: typeof errorNotify;
     infoNotify: typeof infoNotify;
     warningNotify: typeof warningNotify;
-    enCustomeErrorNorify: typeof enCustomeErrorNorify;
-    frCustomeErrorNorify: typeof frCustomeErrorNorify;
+    enCustomeErrorNotify: typeof enCustomeErrorNotify;
+    frCustomeErrorNotify: typeof frCustomeErrorNotify;
 };
