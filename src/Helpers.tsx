@@ -2,7 +2,7 @@ import React from "react";
 import axios from 'axios'
 import slugify from 'slugify';
 import { toast } from 'react-toastify';
-import { DateElement, DateFormatElement, DateFormatTemplate, TruncateTextProps, labelProps } from './index.types'
+import { DateElement, DateFormatElement, DateFormatTemplate, TruncateTextProps } from './index.types'
 
 export const transformData = async (data: any[]) => {
     const transformedData = data.map((item, index) => {
@@ -241,11 +241,6 @@ export function removeHtmlTags(input: any) {
     return input.replace(/<[^>]*>/g, '');
 }
 
-export const FormLabel = ({ value, isRequired = true, className }: labelProps) => {
-    return <label className={`col-lg-6 col-md-6 col-form-label fw-bold fs-6 ${isRequired ? 'required' : ''} ${className}`}>{value}</label>
-}
-
-
 
 // -----------------------------
 // Notify
@@ -279,11 +274,11 @@ export function warningNotify(text: string) {
     toast.warning(`${text}`);
 };
 
-export function enCustomeErrorNorify() {
+export function enCustomeErrorNotify() {
     toast.error('Something wrong, try again');
 };
 
-export function frCustomeErrorNorify() {
+export function frCustomeErrorNotify() {
     toast.error('Une erreur est survenue, réessayez');
 };
 
@@ -299,6 +294,6 @@ export const notify = {
     errorNotify,
     infoNotify,
     warningNotify,
-    enCustomeErrorNorify,
-    frCustomeErrorNorify
+    enCustomeErrorNotify,
+    frCustomeErrorNotify
 };

@@ -27,6 +27,7 @@ export declare function infoNotify(text: string): void;
 export declare function warningNotify(text: string): void;
 export declare function enCustomeErrorNorify(): void;
 export declare function frCustomeErrorNorify(): void;
+export declare function arrayToString(items: string[]): string;
 export declare const notify: {
     postNotify: typeof postNotify;
     updateNotify: typeof updateNotify;

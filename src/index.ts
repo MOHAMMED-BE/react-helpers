@@ -18,7 +18,6 @@ export {
     formatDate,
     getTodayDate,
     removeHtmlTags,
-    FormLabel,
     notify,
     postNotify,
     updateNotify,
@@ -27,8 +26,8 @@ export {
     errorNotify,
     infoNotify,
     warningNotify,
-    enCustomeErrorNorify,
-    frCustomeErrorNorify
+    enCustomeErrorNotify,
+    frCustomeErrorNotify
 } from './Helpers';
 
 export { ToastContainer }

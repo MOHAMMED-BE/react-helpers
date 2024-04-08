@@ -78,7 +78,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.notify = exports.frCustomeErrorNorify = exports.enCustomeErrorNorify = exports.warningNotify = exports.infoNotify = exports.errorNotify = exports.successNotify = exports.deleteNotify = exports.updateNotify = exports.postNotify = exports.FormLabel = exports.removeHtmlTags = exports.getTodayDate = exports.formatDate = exports.TruncateText = exports.handleImageLinkDrage = exports.formatPrice = exports.handleScrollTop = exports.decodeHtmlTags = exports.encodeHtmlTags = exports.isEven = exports.getFirstWord = exports.arabicSlugGenerator = exports.slugGenerator = exports.referenceGenerator = exports.randomKeyGenerator = exports.transformCartData = exports.transformData = void 0;
+exports.notify = exports.arrayToString = exports.frCustomeErrorNorify = exports.enCustomeErrorNorify = exports.warningNotify = exports.infoNotify = exports.errorNotify = exports.successNotify = exports.deleteNotify = exports.updateNotify = exports.postNotify = exports.FormLabel = exports.removeHtmlTags = exports.getTodayDate = exports.formatDate = exports.TruncateText = exports.handleImageLinkDrage = exports.formatPrice = exports.handleScrollTop = exports.decodeHtmlTags = exports.encodeHtmlTags = exports.isEven = exports.getFirstWord = exports.arabicSlugGenerator = exports.slugGenerator = exports.referenceGenerator = exports.randomKeyGenerator = exports.transformCartData = exports.transformData = void 0;
 var react_1 = __importDefault(require("react"));
 var axios_1 = __importDefault(require("axios"));
 var slugify_1 = __importDefault(require("slugify"));
@@ -195,12 +195,20 @@ function isEven(number) {
 }
 exports.isEven = isEven;
 var encodeHtmlAssociations = (_a = {},
-    _a["<"] = "@lt",
-    _a[">"] = "@gt",
+    _a['<'] = '@lt',
+    _a['>'] = '@gt',
+    _a['%'] = '@percent',
+    _a['style="'] = '@style',
+    _a[':'] = '@twopoint',
+    _a[';'] = '@pointcomma',
     _a);
 var decodeHtmlAssociations = (_b = {},
-    _b["@lt"] = "<",
-    _b["@gt"] = ">",
+    _b['@lt'] = '<',
+    _b['@gt'] = '>',
+    _b['@percent'] = '%',
+    _b['@style'] = 'style="',
+    _b['@twopoint'] = ':',
+    _b['@pointcomma'] = ';',
     _b);
 function encodeHtmlTags(html) {
     Object.keys(encodeHtmlAssociations).forEach(function (key) {
@@ -329,6 +337,10 @@ function frCustomeErrorNorify() {
 }
 exports.frCustomeErrorNorify = frCustomeErrorNorify;
 ;
+function arrayToString(items) {
+    return items.join(',');
+}
+exports.arrayToString = arrayToString;
 exports.notify = {
     postNotify: postNotify,
     updateNotify: updateNotify,
