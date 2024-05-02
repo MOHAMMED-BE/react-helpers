@@ -1,7 +1,7 @@
 {
   "name": "@mbs-dev/react-helpers",
   "version": "1.0.5",
-  "description": "react-helpers",
+  "description": "A collection of utility functions designed to streamline common tasks within React projects.",
   "main": "dist/index.js",
   "types": "types/index.d.ts",
   "scripts": {
@@ -13,7 +13,9 @@
     "url": "git+https://github.com/MOHAMMED-BE/react-helpers.git"
   },
   "keywords": [
-    "react"
+    "react",
+    "helpers",
+    "functions"
   ],
   "author": "MOHAMMED BEN-SEGHIR",
   "license": "MIT",

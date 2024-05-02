@@ -1,8 +1,8 @@
 import { ToastContainer } from 'react-toastify';
 
 export {
-    transformData,
-    transformCartData,
+    DateFormatTemplate,
+    formDataGenerator,
     randomKeyGenerator,
     referenceGenerator,
     slugGenerator,
@@ -13,7 +13,6 @@ export {
     decodeHtmlTags,
     handleScrollTop,
     formatPrice,
-    handleImageLinkDrage,
     TruncateText,
     formatDate,
     getTodayDate,
@@ -27,7 +26,8 @@ export {
     infoNotify,
     warningNotify,
     enCustomeErrorNotify,
-    frCustomeErrorNotify
+    frCustomeErrorNotify,
+
 } from './Helpers';
 
 export { ToastContainer }

@@ -1,61 +1,32 @@
 import React from "react";
-import axios from 'axios'
 import slugify from 'slugify';
 import { toast } from 'react-toastify';
-import { DateElement, DateFormatElement, DateFormatTemplate, TruncateTextProps } from './index.types'
+import { DateElement, DateFormatElement, TruncateTextProps } from './index.types'
+export type DateFormatTemplate = (dateFormat: Record<DateFormatElement, string>) => string;
 
-export const transformData = async (data: any[]) => {
-    const transformedData = data.map((item, index) => {
-        const { product, variant, isvariant, itemtype, ...rest } = item
 
-        const transformedItem: any = {
-            ...(itemtype === 'product' ? { product: `api/products/${product}` } : {}),
-            ...(isvariant && variant ? { variant: `api/variants/${variant}` } : {}),
-            ...(itemtype === 'pack' ? { pack: `api/packs/${product}` } : {}),
-            ...(isvariant ? { isvariant: true } : { isvariant: false }),
-            ...rest,
-        }
-
-        return transformedItem
-    })
-
-    return transformedData
-}
-
-export const transformCartData = async (data: any[]) => {
-    const packIdsArray = await Promise.all(
-        data.map(async (item) => {
-            const { product } = item
-            let uniqId = typeof product === 'string' ? product : null
-
-            if (uniqId !== null) {
-                const response = await axios.get(`pack-id/uniq_id/${product}`);
-
-                if (response.status === 200) {
-                    return response.data.packId
+export function formDataGenerator(object: any, prefix = "", formData: FormData) {
+    for (const key in object) {
+        if (object.hasOwnProperty(key)) {
+            const propKey = prefix
+                ? `${prefix}[${key === "file" ? "value" : key}]`
+                : key;
+            const value = object[key];
+            if (value != null) {
+                if (value instanceof Blob) {
+                    formData.append(propKey, value);
+                } else if (typeof value === "object" && value !== null) {
+                    if (value.hasOwnProperty('uri')) {
+                        formData.append(propKey, value)
+                    } else {
+                        formDataGenerator(value, propKey, formData);
+                    }
+                } else {
+                    formData.append(propKey, value);
                 }
             }
-
-            return null
-        })
-    )
-
-    const transformedData = data.map((item, index) => {
-        const { product, variant, isvariant, ...rest } = item
-        const packId = typeof product === 'string' ? packIdsArray[index] : null
-
-        const transformedItem: any = {
-            ...(typeof product === 'number' ? { product: `api/products/${product}` } : {}),
-            ...(isvariant && variant ? { variant: `api/variants/${variant}` } : {}),
-            ...(typeof product === 'string' && packId !== null ? { pack: `api/packs/${packId}` } : {}),
-            ...(isvariant ? { isvariant: true } : { isvariant: false }),
-            ...rest,
         }
-
-        return transformedItem
-    })
-
-    return transformedData
+    }
 }
 
 export const randomKeyGenerator = (length: number): string => {
@@ -70,7 +41,7 @@ export const randomKeyGenerator = (length: number): string => {
     return randomKey;
 }
 
-export const referenceGenerator = (...elements: DateElement[]): string => {
+export const referenceGenerator = (randomLength: number = 2, ...elements: DateElement[]): string => {
     const currentDate = new Date();
     const dateElements: Record<DateElement, string> = {
         year: String(currentDate.getFullYear()).slice(-2),
@@ -79,7 +50,7 @@ export const referenceGenerator = (...elements: DateElement[]): string => {
         hours: String(currentDate.getHours()).padStart(2, "0"),
         minutes: String(currentDate.getMinutes()).padStart(2, "0"),
         seconds: String(currentDate.getSeconds()).padStart(2, "0"),
-        randomNumber: Math.floor(Math.random() * 99).toString().padStart(2, "0"),
+        randomNumber: Math.floor(Math.random() * Math.pow(10, randomLength)).toString().padStart(randomLength, "0"),
     };
 
     return elements.map(element => dateElements[element]).join('');
@@ -125,32 +96,13 @@ export function isEven(number: number): boolean {
     return number % 2 === 0;
 }
 
-// const encodeHtmlAssociations: { [key: string]: string } = {
-//     ["<"]: "@lt",
-//     [">"]: "@gt",
-// }
-// const decodeHtmlAssociations: { [key: string]: string } = {
-//     ["@lt"]: "<",
-//     ["@gt"]: ">",
-// }
-
 const encodeHtmlAssociations: { [key: string]: string } = {
-    ['<']: '@lt',
-    ['>']: '@gt',
-    ['%']: '@percent',
-    ['style="']: '@style',
-    [':']: '@twopoint',
-    [';']: '@pointcomma',
+    ["<"]: "@lt",
+    [">"]: "@gt",
 }
-
-
 const decodeHtmlAssociations: { [key: string]: string } = {
-    ['@lt']: '<',
-    ['@gt']: '>',
-    ['@percent']: '%',
-    ['@style']: 'style="',
-    ['@twopoint']: ':',
-    ['@pointcomma']: ';',
+    ["@lt"]: "<",
+    ["@gt"]: ">",
 }
 
 export function encodeHtmlTags(html: string): string {
@@ -185,11 +137,6 @@ export function formatPrice(price: string): string {
         maximumFractionDigits: 2,
     }).replace(',', ' ');
 }
-
-
-export const handleImageLinkDrage = (e: any) => {
-    e.preventDefault();
-};
 
 
 export function TruncateText({ text, maxLength }: TruncateTextProps) {
@@ -237,9 +184,11 @@ export const getTodayDate = (dateElements: DateFormatElement[] = ['day', 'month'
     return formattedDate;
 };
 
+
 export function removeHtmlTags(input: any) {
     return input.replace(/<[^>]*>/g, '');
 }
+
 
 
 // -----------------------------
@@ -282,9 +231,6 @@ export function frCustomeErrorNotify() {
     toast.error('Une erreur est survenue, réessayez');
 };
 
-export function arrayToString(items: string[]): string {
-    return items.join(',');
-}
 
 export const notify = {
     postNotify,
