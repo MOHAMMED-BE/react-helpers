@@ -6,6 +6,7 @@ export declare const randomKeyGenerator: (length: number) => string;
 export declare const referenceGenerator: (randomLength?: number, ...elements: DateElement[]) => string;
 export declare function slugGenerator(inputString: string): string;
 export declare function arabicSlugGenerator(inputString: string): string;
+export declare const exportDataToExcel: (data: any, fileName: string) => Promise<void>;
 export declare const getFirstWord: (inputString: string) => string;
 export declare function isEven(number: number): boolean;
 export declare function encodeHtmlTags(html: string): string;

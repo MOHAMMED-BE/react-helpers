@@ -84,7 +84,7 @@ export function arabicSlugGenerator(inputString: string): string {
     return slug;
 }
 
-export const exportDataAsExcel = async (data: any, fileName: string) => {
+export const exportDataToExcel = async (data: any, fileName: string) => {
     if (data) {
         const naming = `${fileName}.xlsx`;
 
