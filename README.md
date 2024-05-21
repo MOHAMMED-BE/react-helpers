@@ -22,6 +22,25 @@ Import Helpers:
   ```
 
 ### Available Functions:
+- 1 : formDataGenerator
+- 2 : randomKeyGenerator
+- 3 : referenceGenerator
+- 4 : slugGenerator
+- 5 : arabicSlugGenerator
+- 6 : exportDataToExcel
+- 7 : getFirstWord
+- 8 : isEven
+- 9 : encodeHtmlTags
+- 10 : decodeHtmlTags
+- 11 : handleScrollTop
+- 12 : formatPrice
+- 13 : formatDate
+- 14 : TruncateText
+- 15 : getTodayDate
+- 16 : removeHtmlTags
+- 17 : Notify
+
+
 
 ---------------------------------------
 - 1 : 
@@ -132,6 +151,36 @@ Import Helpers:
 
 ---------------------------------------
 - 6 : 
+  `exportDataToExcel(data, fileName)`:
+
+    This function takes data in the form of a 2D array and exports it as an Excel file with the specified file name. The generated file will have a .xlsx extension and contain the data on a single sheet named "Sheet1".
+    Example:
+
+```js
+  const App: React.FC = () => {
+    const exportData = async () => {
+      const response = await apiRequest({
+        route: 'data-to-export',
+        method: 'GET',
+      });
+      if (response.status === 200) {
+        await exportDataToExcel(response.data, 'UserData' )
+      }
+    }
+    return (
+        <main>
+            <button onClick={exportData}>Export Data</button>
+        </main>
+    );
+    };
+
+    export default App;
+
+```
+
+
+---------------------------------------
+- 7 : 
   `getFirstWord(inputString)`:
 
     Extracts the first word from a string, handling cases where there's only one word or multiple words.
@@ -145,7 +194,7 @@ Import Helpers:
 
 
 ---------------------------------------
-- 7 : 
+- 8 : 
   `isEven(number)`:
 
     Determines whether a number is even.
@@ -159,7 +208,7 @@ Import Helpers:
 
 
 ---------------------------------------
-- 8 : 
+- 9 : 
   `encodeHtmlTags(html)`:
 
     Encodes HTML tags (less than '<' and greater than '>') to prevent unintended rendering within text content.
@@ -173,7 +222,7 @@ Import Helpers:
 
 
 ---------------------------------------
-- 9 : 
+- 10 : 
   `decodeHtmlTags(html)`:
 
     Decodes previously encoded HTML tags back to their original form.
@@ -186,7 +235,7 @@ Import Helpers:
 
 
 ---------------------------------------
-- 10 : 
+- 11 : 
   `handleScrollTop()`: 
   
     This function scrolls the document to the top.
@@ -208,7 +257,7 @@ Import Helpers:
 
 
 ---------------------------------------
-- 11 : 
+- 12 : 
   `formatPrice(price)`: 
   
     This function formats a price string to include commas and a specific number of decimal places.
@@ -220,19 +269,6 @@ Import Helpers:
   console.log(formattedPrice); // Output: "1 234.57"
 ```
 
-
----------------------------------------
-- 12 : 
-  `TruncateText({ text, maxLength })`: 
-  
-    This function truncates a string to a specified maximum length and adds an ellipsis (...) if the text is longer.
-    Example:
-
-```js
-  const longText = "This is a very long text that needs to be truncated.";
-  const truncatedText = TruncateText({ text: longText, maxLength: 20 });
-  console.log(truncatedText); // Output: "This is a very lon..."
-```
 
 
 ---------------------------------------
@@ -261,6 +297,19 @@ Import Helpers:
 
 ---------------------------------------
 - 14 : 
+  `TruncateText({ text, maxLength })`: 
+  
+    This function truncates a string to a specified maximum length and adds an ellipsis (...) if the text is longer.
+    Example:
+
+```js
+  const longText = "This is a very long text that needs to be truncated.";
+  const truncatedText = TruncateText({ text: longText, maxLength: 20 });
+  console.log(truncatedText); // Output: "This is a very lon..."
+```
+
+---------------------------------------
+- 15 : 
   `getTodayDate(dateElements)`:
   
   This function retrieves today's date and formats it based on the specified elements (day, month, year).
@@ -276,7 +325,7 @@ Import Helpers:
 
 
 ---------------------------------------
-- 15 : 
+- 16 : 
   `removeHtmlTags(input)`: 
   
     This function removes all HTML tags from a string.
@@ -290,7 +339,7 @@ Import Helpers:
 
 
 ---------------------------------------
-- 16 : 
+- 17 : 
   `Notify Functions`:
 
   These functions utilize the react-toastify library (assumed to be installed separately) to display notification messages. They provide various message types for success, error, information, warning, and custom error notifications in English and French.

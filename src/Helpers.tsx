@@ -1,5 +1,6 @@
 import React from "react";
 import slugify from 'slugify';
+import XLSX from "xlsx";
 import { toast } from 'react-toastify';
 import { DateElement, DateFormatElement, TruncateTextProps } from './index.types'
 export type DateFormatTemplate = (dateFormat: Record<DateFormatElement, string>) => string;
@@ -83,6 +84,19 @@ export function arabicSlugGenerator(inputString: string): string {
     return slug;
 }
 
+export const exportDataAsExcel = async (data: any, fileName: string) => {
+    if (data) {
+        const naming = `${fileName}.xlsx`;
+
+        const wb = XLSX.utils.book_new();
+        const ws = XLSX.utils.aoa_to_sheet(data);
+
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        XLSX.writeFile(wb, naming);
+    }
+}
+
+
 export const getFirstWord = (inputString: string): string => {
     const words = inputString.split(' ');
     if (words.length === 1) {
@@ -97,12 +111,20 @@ export function isEven(number: number): boolean {
 }
 
 const encodeHtmlAssociations: { [key: string]: string } = {
-    ["<"]: "@lt",
-    [">"]: "@gt",
+    ['<']: '@lt',
+    ['>']: '@gt',
+    ['%']: '@percent',
+    ['style="']: '@style',
+    [':']: '@twopoint',
+    [';']: '@pointcomma'
 }
 const decodeHtmlAssociations: { [key: string]: string } = {
-    ["@lt"]: "<",
-    ["@gt"]: ">",
+    ['@lt']: '<',
+    ['@gt']: '>',
+    ['@percent']: '%',
+    ['@style']: 'style="',
+    ['@twopoint']: ':',
+    ['@pointcomma']: ';'
 }
 
 export function encodeHtmlTags(html: string): string {

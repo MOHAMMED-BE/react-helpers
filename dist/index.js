@@ -1,11 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ToastContainer = exports.frCustomeErrorNotify = exports.enCustomeErrorNotify = exports.warningNotify = exports.infoNotify = exports.errorNotify = exports.successNotify = exports.deleteNotify = exports.updateNotify = exports.postNotify = exports.notify = exports.removeHtmlTags = exports.getTodayDate = exports.formatDate = exports.TruncateText = exports.handleImageLinkDrage = exports.formatPrice = exports.handleScrollTop = exports.decodeHtmlTags = exports.encodeHtmlTags = exports.isEven = exports.getFirstWord = exports.arabicSlugGenerator = exports.slugGenerator = exports.referenceGenerator = exports.randomKeyGenerator = exports.transformCartData = exports.transformData = void 0;
+exports.ToastContainer = exports.frCustomeErrorNotify = exports.enCustomeErrorNotify = exports.warningNotify = exports.infoNotify = exports.errorNotify = exports.successNotify = exports.deleteNotify = exports.updateNotify = exports.postNotify = exports.notify = exports.removeHtmlTags = exports.getTodayDate = exports.formatDate = exports.TruncateText = exports.formatPrice = exports.handleScrollTop = exports.decodeHtmlTags = exports.encodeHtmlTags = exports.isEven = exports.getFirstWord = exports.arabicSlugGenerator = exports.slugGenerator = exports.referenceGenerator = exports.randomKeyGenerator = exports.formDataGenerator = void 0;
 var react_toastify_1 = require("react-toastify");
 Object.defineProperty(exports, "ToastContainer", { enumerable: true, get: function () { return react_toastify_1.ToastContainer; } });
 var Helpers_1 = require("./Helpers");
-Object.defineProperty(exports, "transformData", { enumerable: true, get: function () { return Helpers_1.transformData; } });
-Object.defineProperty(exports, "transformCartData", { enumerable: true, get: function () { return Helpers_1.transformCartData; } });
+Object.defineProperty(exports, "formDataGenerator", { enumerable: true, get: function () { return Helpers_1.formDataGenerator; } });
 Object.defineProperty(exports, "randomKeyGenerator", { enumerable: true, get: function () { return Helpers_1.randomKeyGenerator; } });
 Object.defineProperty(exports, "referenceGenerator", { enumerable: true, get: function () { return Helpers_1.referenceGenerator; } });
 Object.defineProperty(exports, "slugGenerator", { enumerable: true, get: function () { return Helpers_1.slugGenerator; } });
@@ -16,7 +15,6 @@ Object.defineProperty(exports, "encodeHtmlTags", { enumerable: true, get: functi
 Object.defineProperty(exports, "decodeHtmlTags", { enumerable: true, get: function () { return Helpers_1.decodeHtmlTags; } });
 Object.defineProperty(exports, "handleScrollTop", { enumerable: true, get: function () { return Helpers_1.handleScrollTop; } });
 Object.defineProperty(exports, "formatPrice", { enumerable: true, get: function () { return Helpers_1.formatPrice; } });
-Object.defineProperty(exports, "handleImageLinkDrage", { enumerable: true, get: function () { return Helpers_1.handleImageLinkDrage; } });
 Object.defineProperty(exports, "TruncateText", { enumerable: true, get: function () { return Helpers_1.TruncateText; } });
 Object.defineProperty(exports, "formatDate", { enumerable: true, get: function () { return Helpers_1.formatDate; } });
 Object.defineProperty(exports, "getTodayDate", { enumerable: true, get: function () { return Helpers_1.getTodayDate; } });
