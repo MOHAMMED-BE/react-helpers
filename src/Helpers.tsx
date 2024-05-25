@@ -1,6 +1,7 @@
 import React from "react";
 import slugify from 'slugify';
 import XLSX from "xlsx";
+import moment from "moment";
 import { toast } from 'react-toastify';
 import { DateElement, DateFormatElement, TruncateTextProps } from './index.types'
 export type DateFormatTemplate = (dateFormat: Record<DateFormatElement, string>) => string;
@@ -14,7 +15,10 @@ export function formDataGenerator(object: any, prefix = "", formData: FormData) 
                 : key;
             const value = object[key];
             if (value != null) {
-                if (value instanceof Blob) {
+                if (value instanceof Date) {
+                    formData.append(propKey, moment(value).format('YYYY-MM-DD'));
+                }
+                else if (value instanceof Blob) {
                     formData.append(propKey, value);
                 } else if (typeof value === "object" && value !== null) {
                     if (value.hasOwnProperty('uri')) {
