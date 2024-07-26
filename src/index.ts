@@ -18,6 +18,8 @@ export {
     TruncateText,
     getTodayDate,
     removeHtmlTags,
+    useDebounce,
+    useLocalStorage,
     notify,
     postNotify,
     updateNotify,

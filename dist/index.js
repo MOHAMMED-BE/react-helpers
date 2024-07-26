@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ToastContainer = exports.frCustomeErrorNotify = exports.enCustomeErrorNotify = exports.warningNotify = exports.infoNotify = exports.errorNotify = exports.successNotify = exports.deleteNotify = exports.updateNotify = exports.postNotify = exports.notify = exports.removeHtmlTags = exports.getTodayDate = exports.TruncateText = exports.formatDate = exports.formatPrice = exports.handleScrollTop = exports.decodeHtmlTags = exports.encodeHtmlTags = exports.isEven = exports.getFirstWord = exports.exportDataToExcel = exports.arabicSlugGenerator = exports.slugGenerator = exports.referenceGenerator = exports.randomKeyGenerator = exports.formDataGenerator = void 0;
+exports.ToastContainer = exports.frCustomeErrorNotify = exports.enCustomeErrorNotify = exports.warningNotify = exports.infoNotify = exports.errorNotify = exports.successNotify = exports.deleteNotify = exports.updateNotify = exports.postNotify = exports.notify = exports.useLocalStorage = exports.useDebounce = exports.removeHtmlTags = exports.getTodayDate = exports.TruncateText = exports.formatDate = exports.formatPrice = exports.handleScrollTop = exports.decodeHtmlTags = exports.encodeHtmlTags = exports.isEven = exports.getFirstWord = exports.exportDataToExcel = exports.arabicSlugGenerator = exports.slugGenerator = exports.referenceGenerator = exports.randomKeyGenerator = exports.formDataGenerator = void 0;
 var react_toastify_1 = require("react-toastify");
 Object.defineProperty(exports, "ToastContainer", { enumerable: true, get: function () { return react_toastify_1.ToastContainer; } });
 var Helpers_1 = require("./Helpers");
@@ -20,6 +20,8 @@ Object.defineProperty(exports, "formatDate", { enumerable: true, get: function (
 Object.defineProperty(exports, "TruncateText", { enumerable: true, get: function () { return Helpers_1.TruncateText; } });
 Object.defineProperty(exports, "getTodayDate", { enumerable: true, get: function () { return Helpers_1.getTodayDate; } });
 Object.defineProperty(exports, "removeHtmlTags", { enumerable: true, get: function () { return Helpers_1.removeHtmlTags; } });
+Object.defineProperty(exports, "useDebounce", { enumerable: true, get: function () { return Helpers_1.useDebounce; } });
+Object.defineProperty(exports, "useLocalStorage", { enumerable: true, get: function () { return Helpers_1.useLocalStorage; } });
 Object.defineProperty(exports, "notify", { enumerable: true, get: function () { return Helpers_1.notify; } });
 Object.defineProperty(exports, "postNotify", { enumerable: true, get: function () { return Helpers_1.postNotify; } });
 Object.defineProperty(exports, "updateNotify", { enumerable: true, get: function () { return Helpers_1.updateNotify; } });

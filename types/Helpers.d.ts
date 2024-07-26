@@ -1,7 +1,7 @@
 import React from "react";
 import { DateElement, DateFormatElement, TruncateTextProps } from './index.types';
 export type DateFormatTemplate = (dateFormat: Record<DateFormatElement, string>) => string;
-export declare function formDataGenerator(object: any, prefix: string | undefined, formData: FormData): void;
+export declare function formDataGenerator(object: any, formData: FormData, prefix?: String): void;
 export declare const randomKeyGenerator: (length: number) => string;
 export declare const referenceGenerator: (randomLength?: number, ...elements: DateElement[]) => string;
 export declare function slugGenerator(inputString: string): string;
@@ -17,6 +17,8 @@ export declare function TruncateText({ text, maxLength }: TruncateTextProps): st
 export declare function formatDate(dateInput: string, template?: DateFormatTemplate, asInputValue?: boolean): string;
 export declare const getTodayDate: (dateElements?: DateFormatElement[]) => string;
 export declare function removeHtmlTags(input: any): any;
+export declare function useDebounce<T>(value: T, delay: number): T;
+export declare function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void];
 export declare function postNotify(entity: string): void;
 export declare function updateNotify(entity: string): void;
 export declare function deleteNotify(entity: string): void;

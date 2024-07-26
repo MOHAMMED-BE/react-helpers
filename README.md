@@ -38,13 +38,15 @@ Import Helpers:
 - 14 : TruncateText
 - 15 : getTodayDate
 - 16 : removeHtmlTags
-- 17 : Notify
+- 17 : useDebounce
+- 18 : useLocalStorage
+- 19 : Notify
 
 
 
 ---------------------------------------
 - 1 : 
-  `formDataGenerator(object, prefix, formData)`:
+  `formDataGenerator(object, formData, prefix)`:
   
     Recursively iterates through an object and appends key-value pairs to a FormData object, handling nested objects and Blobs appropriately.
     Example:
@@ -59,7 +61,8 @@ Import Helpers:
   };
 
   const formData = new FormData();
-  formDataGenerator(myObject, '', formData);
+  formDataGenerator(myObject, formData, '');
+  // or formDataGenerator(myObject, formData); prefix is optional with empty string as default value
 ```
   - If prefix is empty (meaning at the root level of the original object), the key itself is used.
   - Otherwise, it constructs a nested key name using square brackets.
@@ -76,7 +79,7 @@ Import Helpers:
   };
 
   const formData = new FormData();
-  formDataGenerator(myObject, "user", formData); // "user" is the prefix
+  formDataGenerator(myObject, formData, "user"); // "user" is the prefix
 ```
 
   For the name property:
@@ -340,6 +343,67 @@ Import Helpers:
 
 ---------------------------------------
 - 17 : 
+  `useDebounce(value, delay)`: 
+  
+    The useDebounce hook allows you to debounce any fast-changing value. This hook is ideal for performance optimization in scenarios like search inputs where you want to delay the execution until the user has stopped typing.
+    Example:
+
+```js
+  const SearchInput = () => {
+  const [inputValue, setInputValue] = useState('');
+  const debouncedValue = useDebounce(inputValue, 500);
+
+  useEffect(() => {
+    // API call or an action to be executed after the specified delay
+    console.log('Debounced Value:', debouncedValue);
+  }, [debouncedValue]);
+
+  return (
+    <input
+      type="text"
+      value={inputValue}
+      onChange={(e) => setInputValue(e.target.value)}
+      placeholder="Type to search..."
+    />
+  );
+  };
+
+```
+
+
+
+---------------------------------------
+- 18 : 
+  `useLocalStorage(key, initialValue)`: 
+  
+    This custom hook simplifies using the browser's localStorage to store and retrieve state. It provides a way to persist state across page reloads.
+    Example:
+
+```js
+  const ThemeToggle: React.FC = () => {
+  const [theme, setTheme] = useLocalStorage<string>('theme', 'light');
+
+  const toggleTheme = () => {
+    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+
+  return (
+    <div style={{ background: theme === 'light' ? '#fff' : '#333', color: theme === 'light' ? '#000' : '#fff', height: '100vh' }}>
+      <h1>{theme === 'light' ? 'Light Mode' : 'Dark Mode'}</h1>
+      <button onClick={toggleTheme}>
+        Toggle Theme
+      </button>
+    </div>
+  );
+  };
+
+  export default ThemeToggle;
+
+```
+
+
+---------------------------------------
+- 19 : 
   `Notify Functions`:
 
   These functions utilize the react-toastify library (assumed to be installed separately) to display notification messages. They provide various message types for success, error, information, warning, and custom error notifications in English and French.

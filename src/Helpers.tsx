@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import slugify from 'slugify';
 import XLSX from "xlsx";
 import moment from "moment";
@@ -7,7 +7,7 @@ import { DateElement, DateFormatElement, TruncateTextProps } from './index.types
 export type DateFormatTemplate = (dateFormat: Record<DateFormatElement, string>) => string;
 
 
-export function formDataGenerator(object: any, prefix = "", formData: FormData) {
+export function formDataGenerator(object: any, formData: FormData, prefix: String = "") {
     for (const key in object) {
         if (object.hasOwnProperty(key)) {
             const propKey = prefix
@@ -24,7 +24,7 @@ export function formDataGenerator(object: any, prefix = "", formData: FormData) 
                     if (value.hasOwnProperty('uri')) {
                         formData.append(propKey, value)
                     } else {
-                        formDataGenerator(value, propKey, formData);
+                        formDataGenerator(value, formData, propKey);
                     }
                 } else {
                     formData.append(propKey, value);
@@ -216,6 +216,45 @@ export function removeHtmlTags(input: any) {
 }
 
 
+export function useDebounce<T>(value: T, delay: number): T {
+    const [debouncedValue, setDebouncedValue] = useState<T>(value);
+
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedValue(value);
+        }, delay);
+
+        return () => {
+            clearTimeout(handler);
+        };
+    }, [value, delay]);
+
+    return debouncedValue;
+}
+
+
+export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void] {
+    const [storedValue, setStoredValue] = useState<T>(() => {
+        try {
+            const item = window.localStorage.getItem(key);
+            return item ? JSON.parse(item) : initialValue;
+        } catch (error) {
+            console.error(error);
+            return initialValue;
+        }
+    });
+
+    const setValue = (value: T) => {
+        try {
+            setStoredValue(value);
+            window.localStorage.setItem(key, JSON.stringify(value));
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    return [storedValue, setValue];
+}
 
 // -----------------------------
 // Notify

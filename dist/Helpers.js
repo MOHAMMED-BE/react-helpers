@@ -1,4 +1,27 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -56,12 +79,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var _a, _b;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.notify = exports.frCustomeErrorNotify = exports.enCustomeErrorNotify = exports.warningNotify = exports.infoNotify = exports.errorNotify = exports.successNotify = exports.deleteNotify = exports.updateNotify = exports.postNotify = exports.removeHtmlTags = exports.getTodayDate = exports.formatDate = exports.TruncateText = exports.formatPrice = exports.handleScrollTop = exports.decodeHtmlTags = exports.encodeHtmlTags = exports.isEven = exports.getFirstWord = exports.exportDataToExcel = exports.arabicSlugGenerator = exports.slugGenerator = exports.referenceGenerator = exports.randomKeyGenerator = exports.formDataGenerator = void 0;
-var react_1 = __importDefault(require("react"));
+exports.notify = exports.frCustomeErrorNotify = exports.enCustomeErrorNotify = exports.warningNotify = exports.infoNotify = exports.errorNotify = exports.successNotify = exports.deleteNotify = exports.updateNotify = exports.postNotify = exports.useLocalStorage = exports.useDebounce = exports.removeHtmlTags = exports.getTodayDate = exports.formatDate = exports.TruncateText = exports.formatPrice = exports.handleScrollTop = exports.decodeHtmlTags = exports.encodeHtmlTags = exports.isEven = exports.getFirstWord = exports.exportDataToExcel = exports.arabicSlugGenerator = exports.slugGenerator = exports.referenceGenerator = exports.randomKeyGenerator = exports.formDataGenerator = void 0;
+var react_1 = __importStar(require("react"));
 var slugify_1 = __importDefault(require("slugify"));
 var xlsx_1 = __importDefault(require("xlsx"));
+var moment_1 = __importDefault(require("moment"));
 var react_toastify_1 = require("react-toastify");
-function formDataGenerator(object, prefix, formData) {
+function formDataGenerator(object, formData, prefix) {
     if (prefix === void 0) { prefix = ""; }
     for (var key in object) {
         if (object.hasOwnProperty(key)) {
@@ -70,7 +94,10 @@ function formDataGenerator(object, prefix, formData) {
                 : key;
             var value = object[key];
             if (value != null) {
-                if (value instanceof Blob) {
+                if (value instanceof Date) {
+                    formData.append(propKey, (0, moment_1.default)(value).format('YYYY-MM-DD'));
+                }
+                else if (value instanceof Blob) {
                     formData.append(propKey, value);
                 }
                 else if (typeof value === "object" && value !== null) {
@@ -78,7 +105,7 @@ function formDataGenerator(object, prefix, formData) {
                         formData.append(propKey, value);
                     }
                     else {
-                        formDataGenerator(value, propKey, formData);
+                        formDataGenerator(value, formData, propKey);
                     }
                 }
                 else {
@@ -256,6 +283,42 @@ function removeHtmlTags(input) {
     return input.replace(/<[^>]*>/g, '');
 }
 exports.removeHtmlTags = removeHtmlTags;
+function useDebounce(value, delay) {
+    var _a = __read((0, react_1.useState)(value), 2), debouncedValue = _a[0], setDebouncedValue = _a[1];
+    (0, react_1.useEffect)(function () {
+        var handler = setTimeout(function () {
+            setDebouncedValue(value);
+        }, delay);
+        return function () {
+            clearTimeout(handler);
+        };
+    }, [value, delay]);
+    return debouncedValue;
+}
+exports.useDebounce = useDebounce;
+function useLocalStorage(key, initialValue) {
+    var _a = __read((0, react_1.useState)(function () {
+        try {
+            var item = window.localStorage.getItem(key);
+            return item ? JSON.parse(item) : initialValue;
+        }
+        catch (error) {
+            console.error(error);
+            return initialValue;
+        }
+    }), 2), storedValue = _a[0], setStoredValue = _a[1];
+    var setValue = function (value) {
+        try {
+            setStoredValue(value);
+            window.localStorage.setItem(key, JSON.stringify(value));
+        }
+        catch (error) {
+            console.error(error);
+        }
+    };
+    return [storedValue, setValue];
+}
+exports.useLocalStorage = useLocalStorage;
 function postNotify(entity) {
     react_toastify_1.toast.success("".concat(entity, " ajout\u00E9 avec succ\u00E8s"));
 }
