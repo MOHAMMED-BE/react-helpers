@@ -260,40 +260,58 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T)
 // Notify
 // -----------------------------
 
-export function postNotify(entity: string) {
-    toast.success(`${entity} ajouté avec succès`);
+export function postNotify(entity: string, delay: number = 1500) {
+    toast.success(`${entity} ajouté avec succès`, {
+        autoClose: delay,
+    });
 };
 
-export function updateNotify(entity: string) {
-    toast.success(`${entity} modifié avec succès`);
+export function updateNotify(entity: string, delay: number = 1500) {
+    toast.success(`${entity} modifié avec succès`, {
+        autoClose: delay,
+    });
 };
 
-export function deleteNotify(entity: string) {
-    toast.success(`${entity} supprimé avec succès`);
+export function deleteNotify(entity: string, delay: number = 1500) {
+    toast.success(`${entity} supprimé avec succès`, {
+        autoClose: delay,
+    });
 };
 
-export function successNotify(text: string) {
-    toast.success(`${text}`);
+export function successNotify(text: string, delay: number = 1500) {
+    toast.success(`${text}`, {
+        autoClose: delay,
+    });
 };
 
-export function errorNotify(text: string) {
-    toast.error(`${text}`);
+export function errorNotify(text: string, delay: number = 1500) {
+    toast.error(`${text}`, {
+        autoClose: delay,
+    });
 };
 
-export function infoNotify(text: string) {
-    toast.info(`${text}`);
+export function infoNotify(text: string, delay: number = 1500) {
+    toast.info(`${text}`, {
+        autoClose: delay,
+    });
 };
 
-export function warningNotify(text: string) {
-    toast.warning(`${text}`);
+export function warningNotify(text: string, delay: number = 1500) {
+    toast.warning(`${text}`, {
+        autoClose: delay,
+    });
 };
 
-export function enCustomeErrorNotify() {
-    toast.error('Something wrong, try again');
+export function enCustomeErrorNotify(delay: number = 1500) {
+    toast.error('Something wrong try again', {
+        autoClose: delay,
+    });
 };
 
-export function frCustomeErrorNotify() {
-    toast.error('Une erreur est survenue, réessayez');
+export function frCustomeErrorNotify(delay: number = 1500) {
+    toast.error('Une erreur est survenue, réessayez', {
+        autoClose: delay,
+    });
 };
 
 

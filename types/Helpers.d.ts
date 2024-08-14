@@ -19,15 +19,15 @@ export declare const getTodayDate: (dateElements?: DateFormatElement[]) => strin
 export declare function removeHtmlTags(input: any): any;
 export declare function useDebounce<T>(value: T, delay: number): T;
 export declare function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T) => void];
-export declare function postNotify(entity: string): void;
-export declare function updateNotify(entity: string): void;
-export declare function deleteNotify(entity: string): void;
-export declare function successNotify(text: string): void;
-export declare function errorNotify(text: string): void;
-export declare function infoNotify(text: string): void;
-export declare function warningNotify(text: string): void;
-export declare function enCustomeErrorNotify(): void;
-export declare function frCustomeErrorNotify(): void;
+export declare function postNotify(entity: string, delay?: number): void;
+export declare function updateNotify(entity: string, delay?: number): void;
+export declare function deleteNotify(entity: string, delay?: number): void;
+export declare function successNotify(text: string, delay?: number): void;
+export declare function errorNotify(text: string, delay?: number): void;
+export declare function infoNotify(text: string, delay?: number): void;
+export declare function warningNotify(text: string, delay?: number): void;
+export declare function enCustomeErrorNotify(delay?: number): void;
+export declare function frCustomeErrorNotify(delay?: number): void;
 export declare const notify: {
     postNotify: typeof postNotify;
     updateNotify: typeof updateNotify;

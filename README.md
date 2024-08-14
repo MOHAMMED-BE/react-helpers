@@ -411,40 +411,41 @@ Import Helpers:
 
 ```js
 
-  postNotify(entity):
+  postNotify(entity, delay):
   Displays a success notification for adding a new entity. 
   e.g. 'Product ajouté avec succès' , 'User ajouté avec succès'
   
-  updateNotify(entity):
+  updateNotify(entity, delay):
   Displays a success notification for updating an entity.
   e.g. 'Product modifié avec succès' , 'User modifié avec succès'
   
-  deleteNotify(entity):
+  deleteNotify(entity, delay):
   Displays a success notification for deleting an entity.
   e.g. 'Product supprimé avec succès' , 'User supprimé avec succès'
   
-  successNotify(text):
+  successNotify(text, delay):
   Displays a general success notification with custom text.
   
-  errorNotify(text):
+  errorNotify(text, delay):
   Displays an error notification with custom text.
   
-  infoNotify(text):
+  infoNotify(text, delay):
   Displays an informational notification with custom text.
   
-  warningNotify(text):
+  warningNotify(text, delay):
   Displays a warning notification with custom text.
   
-  enCustomeErrorNotify():
+  enCustomeErrorNotify(delay):
   Displays a custom error notification in English ("Something wrong, try again").
   
-  frCustomeErrorNotify():
+  frCustomeErrorNotify(delay):
   Displays a custom error notification in French ("Une erreur est survenue, réessayez").
 
 ```
   Remember: 
   - You can import the 'notify' from @mbs-dev/react-helpers instead of import each notify function separately.
   - You must import and use ToastContainer from '@mbs-dev/react-helpers' to display the toast when use the Notify functions.
+  - delay is optional with default value 1500ms
 
 
 ```js
@@ -454,8 +455,9 @@ Import Helpers:
   import "react-toastify/dist/ReactToastify.css";
 
   const App = () => {
-    console.log(notify.successNotify('Access the successNotify from notify'));
-    console.log(notify.frCustomeErrorNotify());
+    notify.successNotify('Access the successNotify from notify');
+    notify.infoNotify('Access the infoNotify from notify', 2000);
+    notify.frCustomeErrorNotify();
 
     return (
           <LayoutProvider>

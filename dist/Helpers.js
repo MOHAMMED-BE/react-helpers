@@ -319,48 +319,75 @@ function useLocalStorage(key, initialValue) {
     return [storedValue, setValue];
 }
 exports.useLocalStorage = useLocalStorage;
-function postNotify(entity) {
-    react_toastify_1.toast.success("".concat(entity, " ajout\u00E9 avec succ\u00E8s"));
+function postNotify(entity, delay) {
+    if (delay === void 0) { delay = 1500; }
+    react_toastify_1.toast.success("".concat(entity, " ajout\u00E9 avec succ\u00E8s"), {
+        autoClose: delay,
+    });
 }
 exports.postNotify = postNotify;
 ;
-function updateNotify(entity) {
-    react_toastify_1.toast.success("".concat(entity, " modifi\u00E9 avec succ\u00E8s"));
+function updateNotify(entity, delay) {
+    if (delay === void 0) { delay = 1500; }
+    react_toastify_1.toast.success("".concat(entity, " modifi\u00E9 avec succ\u00E8s"), {
+        autoClose: delay,
+    });
 }
 exports.updateNotify = updateNotify;
 ;
-function deleteNotify(entity) {
-    react_toastify_1.toast.success("".concat(entity, " supprim\u00E9 avec succ\u00E8s"));
+function deleteNotify(entity, delay) {
+    if (delay === void 0) { delay = 1500; }
+    react_toastify_1.toast.success("".concat(entity, " supprim\u00E9 avec succ\u00E8s"), {
+        autoClose: delay,
+    });
 }
 exports.deleteNotify = deleteNotify;
 ;
-function successNotify(text) {
-    react_toastify_1.toast.success("".concat(text));
+function successNotify(text, delay) {
+    if (delay === void 0) { delay = 1500; }
+    react_toastify_1.toast.success("".concat(text), {
+        autoClose: delay,
+    });
 }
 exports.successNotify = successNotify;
 ;
-function errorNotify(text) {
-    react_toastify_1.toast.error("".concat(text));
+function errorNotify(text, delay) {
+    if (delay === void 0) { delay = 1500; }
+    react_toastify_1.toast.error("".concat(text), {
+        autoClose: delay,
+    });
 }
 exports.errorNotify = errorNotify;
 ;
-function infoNotify(text) {
-    react_toastify_1.toast.info("".concat(text));
+function infoNotify(text, delay) {
+    if (delay === void 0) { delay = 1500; }
+    react_toastify_1.toast.info("".concat(text), {
+        autoClose: delay,
+    });
 }
 exports.infoNotify = infoNotify;
 ;
-function warningNotify(text) {
-    react_toastify_1.toast.warning("".concat(text));
+function warningNotify(text, delay) {
+    if (delay === void 0) { delay = 1500; }
+    react_toastify_1.toast.warning("".concat(text), {
+        autoClose: delay,
+    });
 }
 exports.warningNotify = warningNotify;
 ;
-function enCustomeErrorNotify() {
-    react_toastify_1.toast.error('Something wrong, try again');
+function enCustomeErrorNotify(delay) {
+    if (delay === void 0) { delay = 1500; }
+    react_toastify_1.toast.error('Something wrong try again', {
+        autoClose: delay,
+    });
 }
 exports.enCustomeErrorNotify = enCustomeErrorNotify;
 ;
-function frCustomeErrorNotify() {
-    react_toastify_1.toast.error('Une erreur est survenue, réessayez');
+function frCustomeErrorNotify(delay) {
+    if (delay === void 0) { delay = 1500; }
+    react_toastify_1.toast.error('Une erreur est survenue, réessayez', {
+        autoClose: delay,
+    });
 }
 exports.frCustomeErrorNotify = frCustomeErrorNotify;
 ;
